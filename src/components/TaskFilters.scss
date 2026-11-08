@@ -1,0 +1,34 @@
+.task-filters {
+  display: flex;
+  gap: 6px;
+  padding-bottom: 19px;
+  flex-wrap: wrap;
+  &__button {
+    border: 0;
+    background: transparent;
+    color: #7c8192;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    span {
+      background: #e9eaf0;
+      border-radius: 5px;
+      padding: 2px 6px;
+      font-size: 10px;
+    }
+    &:hover {
+      background: #eceaf4;
+    }
+    &--active {
+      background: #eae5fb;
+      color: #6e55c5;
+      font-weight: 650;
+      span {
+        background: #dcd3f8;
+      }
+    }
+  }
+}

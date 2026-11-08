@@ -1,0 +1,40 @@
+.header {
+  height: 78px;
+  background: white;
+  border-bottom: 1px solid #e8e9f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(28px, calc((100vw - 1104px) / 2));
+  gap: 16px;
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #25283e;
+    font-size: 20px;
+    font-weight: 750;
+    white-space: nowrap;
+  }
+  &__logo {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    background: #7863d9;
+    border-radius: 11px;
+    color: white;
+    font-size: 23px;
+  }
+  &__label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #85899a;
+  }
+}
+@media (max-width: 600px) {
+  .header__label {
+    display: none;
+  }
+}

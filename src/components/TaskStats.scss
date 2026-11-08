@@ -1,0 +1,39 @@
+.task-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  &__card {
+    background: white;
+    border: 1px solid #e7e8ef;
+    border-radius: 13px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 13px;
+    color: #777d90;
+  }
+  &__value {
+    font-size: 30px;
+    font-weight: 700;
+    color: #555c76;
+  }
+  &__card--active .task-stats__value {
+    color: #b78535;
+  }
+  &__card--done .task-stats__value {
+    color: #449c7d;
+  }
+}
+@media (max-width: 600px) {
+  .task-stats {
+    gap: 8px;
+    &__card {
+      padding: 14px 8px;
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+      font-size: 11px;
+    }
+  }
+}
