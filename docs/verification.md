@@ -17,3 +17,11 @@
 9. LocalStorage недоступне: локальний планувальник залишається працездатним; помилка запису tasks показується повідомленням.
 
 Скриншоти lab09-desktop.png, lab10-desktop.png, lab10-mobile.png створені під час перевірки. Дані API на скриншотах тестові.
+
+## Результат виконаної перевірки
+
+- npm run lint та npm run build: без помилок.
+- npm test: 4 тести reducer/валідації пройшли (immutable update, request/undo/confirm, reset, пошкоджені дані).
+- Браузерні сценарії з контрольованими відповідями пройшли.
+- Окремий live-прогін зі справжнім DummyJSON: успішні GET списку, GET деталей, PATCH completed, POST і DELETE.
+- Візуально перевірено desktop і mobile скриншоти.
