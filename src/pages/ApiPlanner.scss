@@ -1,0 +1,28 @@
+.api-planner {
+  &__note {
+    line-height: 1.6;
+    color: #686f83;
+    margin-bottom: 24px;
+  }
+  &__pagination {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    font-size: 12px;
+  }
+  &__confirm {
+    padding: 20px;
+    background: #fff0e8;
+    border: 1px solid #e4ba99;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    p {
+      margin-bottom: 12px;
+    }
+    button {
+      margin-right: 10px;
+    }
+  }
+}

@@ -72,3 +72,21 @@
     flex-direction: column;
   }
 }
+
+.app__modes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  button {
+    padding: 12px;
+    border: 1px solid #d4c9f0;
+    border-radius: 9px;
+    background: white;
+    color: #6852b5;
+    &[aria-pressed="true"] {
+      background: #7863d9;
+      color: white;
+    }
+  }
+}

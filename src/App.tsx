@@ -1,67 +1,48 @@
 import { useState } from "react";
 import { Header } from "./components/Header";
-import { TaskForm } from "./components/TaskForm";
-import { TaskStats } from "./components/TaskStats";
-import { TaskFilters } from "./components/TaskFilters";
-import { TaskList } from "./components/TaskList";
-import { initialTasks } from "./data/initialTasks";
-import type { Task, TaskDraft, TaskFilter } from "./types/task";
+import { TaskProvider } from "./context/TaskProvider";
+import { LocalPlanner } from "./pages/LocalPlanner";
+import { ApiPlanner } from "./pages/ApiPlanner";
+import "./components/TaskList.scss";
 import "./App.scss";
 export default function App() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
-  const [filter, setFilter] = useState<TaskFilter>("all");
-  function addTask(draft: TaskDraft) {
-    setTasks((previous) => [
-      ...previous,
-      { ...draft, id: crypto.randomUUID(), completed: false },
-    ]);
-  }
-  function toggleTask(id: string) {
-    setTasks((previous) =>
-      previous.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task,
-      ),
-    );
-  }
-  function deleteTask(id: string) {
-    setTasks((previous) => previous.filter((task) => task.id !== id));
-  }
-  const visibleTasks = tasks.filter(
-    (task) =>
-      filter === "all" ||
-      (filter === "completed" ? task.completed : !task.completed),
-  );
+  const [mode, setMode] = useState<"local" | "api">("local");
   return (
     <div className="app">
       <Header />
       <main className="app__main">
         <section className="app__intro">
-          <span className="app__eyebrow">ТВІЙ НАВЧАЛЬНИЙ ПРОСТІР</span>
+          <span className="app__eyebrow">ЛАБОРАТОРНІ РОБОТИ №8–10</span>
           <h1>
             Крок за кроком до мети<span>.</span>
           </h1>
           <p>Плануй навчання, відстежуй прогрес і звільняй час для нового.</p>
         </section>
-        <TaskStats tasks={tasks} />
-        <div className="app__workspace">
-          <TaskForm onAdd={addTask} />
-          <section className="app__tasks" aria-label="Навчальні завдання">
-            <div className="app__tasks-heading">
-              <h2>Мої завдання</h2>
-              <span>Кожен крок має значення</span>
-            </div>
-            <TaskFilters tasks={tasks} filter={filter} onChange={setFilter} />
-            <TaskList
-              tasks={visibleTasks}
-              total={tasks.length}
-              onToggle={toggleTask}
-              onDelete={deleteTask}
-            />
-          </section>
-        </div>
+        <nav className="app__modes" aria-label="Лабораторні">
+          <button
+            aria-pressed={mode === "local"}
+            onClick={() => setMode("local")}
+          >
+            №8–9 · Локальний планувальник
+          </button>
+          <button aria-pressed={mode === "api"} onClick={() => setMode("api")}>
+            №10 · REST API
+          </button>
+        </nav>
+        {mode === "local" ? (
+          <TaskProvider>
+            <LocalPlanner />
+          </TaskProvider>
+        ) : (
+          <ApiPlanner />
+        )}
         <footer className="app__footer">
-          Study Planner · Лабораторна робота №8
-          <span>Дані зберігаються лише до перезавантаження сторінки.</span>
+          Study Planner · React 19 + TypeScript
+          <span>
+            {mode === "local"
+              ? "Завдання зберігаються у localStorage."
+              : "Дані REST API та зміни поточної сесії."}
+          </span>
         </footer>
       </main>
     </div>
