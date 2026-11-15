@@ -1,0 +1,37 @@
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 20;
+  max-width: calc(100vw - 48px);
+  padding: 20px 24px;
+  background: #282440;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px #0003;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  button {
+    border: 0;
+    border-radius: 6px;
+    padding: 5px 12px;
+    color: #433071;
+    background: #eee7ff;
+  }
+  &__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: #b69cf8;
+    width: 100%;
+    animation: countdown 5s linear forwards;
+  }
+}
+@keyframes countdown {
+  to {
+    width: 0;
+  }
+}

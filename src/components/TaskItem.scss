@@ -95,3 +95,10 @@
     }
   }
 }
+
+.task-item {
+  flex-wrap: wrap;
+  &__body {
+    flex-basis: 50%;
+  }
+}

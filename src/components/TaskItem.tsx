@@ -3,13 +3,27 @@ import type { Task } from "../types/task";
 import "./TaskItem.scss";
 interface Props {
   task: Task;
+  pending?: boolean;
+  disabled?: boolean;
+  onEdit?: () => void;
+  onDetails?: () => void;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
 }
-export function TaskItem({ task, onToggle, onDelete }: Props) {
+export function TaskItem({
+  task,
+  onToggle,
+  onDelete,
+  pending,
+  disabled,
+  onEdit,
+  onDetails,
+}: Props) {
   return (
     <li className={`task-item${task.completed ? " task-item--completed" : ""}`}>
+      {pending && <span>Буде видалено…</span>}
       <input
+        disabled={pending || disabled}
         className="task-item__check"
         type="checkbox"
         checked={task.completed}
@@ -31,7 +45,18 @@ export function TaskItem({ task, onToggle, onDelete }: Props) {
           </span>
         </div>
       </div>
+      {onEdit && (
+        <button disabled={pending || disabled} onClick={onEdit}>
+          Редагувати
+        </button>
+      )}
+      {onDetails && (
+        <button disabled={pending || disabled} onClick={onDetails}>
+          Деталі
+        </button>
+      )}
       <button
+        disabled={pending || disabled}
         className="task-item__delete"
         onClick={() => onDelete(task.id)}
         aria-label={`Видалити: ${task.title}`}
