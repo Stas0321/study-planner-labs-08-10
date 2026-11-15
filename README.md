@@ -1,36 +1,48 @@
-# Study Planner — лабораторна робота №8
+# Study Planner · лабораторні №8–10
 
-Навчальний планувальник на Vite, React 19 та TypeScript. Стилізація: SCSS + BEM, окремий файл біля кожного компонента. Перевірка коду: ESLint.
+React 19, TypeScript, Vite; SCSS + BEM; ESLint. Один застосунок з двома режимами, які перемикаються вгорі сторінки.
 
-## Запуск
+## Запуск на Windows
 
-Потрібен Node.js 22.22 або новіший (перевірено на Node.js 24.21).
+Потрібен Node.js 22.22 або новіший.
 
-```sh
+```powershell
+cd C:\Users\stas0\Desktop\WebReact
 npm install
+Copy-Item .env.example .env
 npm run dev
 ```
 
-Відкрити адресу, яку надрукує Vite. Для перевірки та production-збірки:
+Відкрити адресу Local з термінала (звичайно http://localhost:5173). `.env` уже створено в цій робочій папці; копіювання потрібне для нового клону. Змінивши `.env`, перезапустіть Vite. `VITE_API_URL` — публічна конфігурація, а не місце для секретів.
 
-```sh
+```powershell
 npm run lint
 npm run build
 npm run preview
 ```
 
-## Можливості
+## Режими
 
-- Додавання назви, опису, категорії та пріоритету; перевірка порожньої назви після trim.
-- Очищення форми після успішного додавання; стандартна категорія «Без категорії».
-- Перемикання виконання, видалення, три фільтри з лічильниками.
-- Загальна статистика, різні повідомлення для порожнього списку й порожнього фільтра.
-- Адаптивна верстка, підписи полів, клавіатурний фокус і повідомлення без alert().
+- **№8–9 · Локальний планувальник**: функціонал №8, reducer, Context, редагування всіх полів, localStorage, заголовок вкладки, Toast, Undoable Delete з прогресом 5 секунд. Одне видалення одночасно; повторний запит показує повідомлення. Pending-стан не записується у сховище: перезавантаження скасовує незавершене видалення. «Скинути дані» повертає початкові завдання та скасовує таймер.
+- **№10 · REST API**: список DummyJSON по 10 записів, попередня/наступна сторінка, GET деталей, POST, PATCH, DELETE з підтвердженням, loading/error/retry/empty/success. Попередні GET скасовуються при зміні сторінки, деталей або режиму.
 
-Дані зберігаються лише в useState: перезавантаження відновлює демонстраційні завдання. localStorage, Context, Router та API не використовуються.
+В API-режимі статистика й фільтри стосуються завантаженої сторінки. Server state не записується в localStorage. При переході між режимами локальні дані відновлюються зі сховища.
 
-## GitHub
+## Обмеження DummyJSON
 
-Віддалений репозиторій не налаштовано. Для здачі створіть власний порожній GitHub-репозиторій та додайте його як origin, після чого виконайте push поточної гілки. Не додавайте node_modules, dist або .npm-cache.
+DummyJSON імітує POST/PATCH/DELETE без постійного збереження. UI оновлюється після успішної відповіді. Session-cache repository не дозволяє повторно показувати видалені або застарілі записи під час пагінації. Після перезавантаження зміни API скидаються.
 
-Рекомендовані Conventional Commits: `chore(lab-08): scaffold React TypeScript project`, `feat(lab-08): implement study planner basics`, `docs(lab-08): add setup and defense notes`.
+description/category/priority — клієнтські метадані; HTTP передає лише підтримувані todo/completed/userId. Нові POST-записи отримують окремі клієнтські UUID, бо DummyJSON повторює синтетичний id. GET деталей новоствореного запису використовує відповідь POST із пам’яті, оскільки на сервері такого запису немає. PATCH і DELETE демонструйте на завданнях, завантажених GET; для нових записів застосунок чесно показує повідомлення про обмеження API.
+
+Контракт: https://dummyjson.com/docs/todos
+
+## Структура
+
+- `src/components`: форма, список, завдання, фільтри, статистика, Toast, деталі; окремі SCSS-файли.
+- `src/reducers/taskReducer.ts`: чистий reducer і типізовані actions.
+- `src/context/TaskProvider.tsx`: локальний state, operations, effects і cleanup таймерів.
+- `src/hooks`: useTaskContext та generic useLocalStorage.
+- `src/api/httpClient.ts`: URL із env, fetch, перевірка response.ok, помилки.
+- `src/repositories/taskRepository.ts`: endpoints, DTO/domain mapping, CRUD.
+- `src/pages`: локальний та API-планувальники; незалежні джерела даних.
+
