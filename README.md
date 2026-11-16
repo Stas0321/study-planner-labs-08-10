@@ -1,36 +1,17 @@
-# Study Planner — лабораторна робота №8
+# Study Planner — лабораторна №8
 
-Навчальний планувальник на Vite, React 19 та TypeScript. Стилізація: SCSS + BEM, окремий файл біля кожного компонента. Перевірка коду: ESLint.
+Гілка `lab-08`: основи React, JSX, props, useState, події та списки.
 
 ## Запуск
 
-Потрібен Node.js 22.22 або новіший (перевірено на Node.js 24.21).
+Node.js 22.22 або новіший.
 
-```sh
+```powershell
+git clone --branch lab-08 https://github.com/Stas0321/study-planner-labs-08-10.git
+cd study-planner-labs-08-10
 npm install
 npm run dev
 ```
 
-Відкрити адресу, яку надрукує Vite. Для перевірки та production-збірки:
+Перевірка: `npm run lint`, `npm run build`.
 
-```sh
-npm run lint
-npm run build
-npm run preview
-```
-
-## Можливості
-
-- Додавання назви, опису, категорії та пріоритету; перевірка порожньої назви після trim.
-- Очищення форми після успішного додавання; стандартна категорія «Без категорії».
-- Перемикання виконання, видалення, три фільтри з лічильниками.
-- Загальна статистика, різні повідомлення для порожнього списку й порожнього фільтра.
-- Адаптивна верстка, підписи полів, клавіатурний фокус і повідомлення без alert().
-
-Дані зберігаються лише в useState: перезавантаження відновлює демонстраційні завдання. localStorage, Context, Router та API не використовуються.
-
-## GitHub
-
-Віддалений репозиторій не налаштовано. Для здачі створіть власний порожній GitHub-репозиторій та додайте його як origin, після чого виконайте push поточної гілки. Не додавайте node_modules, dist або .npm-cache.
-
-Рекомендовані Conventional Commits: `chore(lab-08): scaffold React TypeScript project`, `feat(lab-08): implement study planner basics`, `docs(lab-08): add setup and defense notes`.
