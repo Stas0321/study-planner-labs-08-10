@@ -14,4 +14,3 @@ npm run dev
 ```
 
 Перевірка: `npm run lint`, `npm run build`.
-
