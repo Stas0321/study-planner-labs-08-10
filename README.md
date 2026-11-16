@@ -1,13 +1,13 @@
-# Study Planner · лабораторні №8–10
+# Study Planner · лабораторна №10
 
-React 19, TypeScript, Vite; SCSS + BEM; ESLint. Один застосунок з двома режимами, які перемикаються вгорі сторінки.
+React 19, TypeScript, Vite; SCSS + BEM; ESLint. Гілка `lab-10` одразу відкриває REST API-планувальник. Попередні етапи доступні в гілках `lab-08` та `lab-09`; підсумкова версія з двома режимами — у `main`.
 
 ## Запуск на Windows
 
 Потрібен Node.js 22.22 або новіший.
 
 ```powershell
-git clone https://github.com/Stas0321/study-planner-labs-08-10.git
+git clone --branch lab-10 https://github.com/Stas0321/study-planner-labs-08-10.git
 cd study-planner-labs-08-10
 npm install
 Copy-Item .env.example .env
@@ -25,10 +25,9 @@ npm run preview
 
 ## Режими
 
-- **№8–9 · Локальний планувальник**: функціонал №8, reducer, Context, редагування всіх полів, localStorage, заголовок вкладки, Toast, Undoable Delete з прогресом 5 секунд. Одне видалення одночасно; повторний запит показує повідомлення. Pending-стан не записується у сховище: перезавантаження скасовує незавершене видалення. «Скинути дані» повертає початкові завдання та скасовує таймер.
 - **№10 · REST API**: список DummyJSON по 10 записів, попередня/наступна сторінка, GET деталей, POST, PATCH, DELETE з підтвердженням, loading/error/retry/empty/success. Попередні GET скасовуються при зміні сторінки, деталей або режиму.
 
-В API-режимі статистика й фільтри стосуються завантаженої сторінки. Server state не записується в localStorage. При переході між режимами локальні дані відновлюються зі сховища.
+В API-режимі статистика й фільтри стосуються завантаженої сторінки. Server state не записується в localStorage. Локальний планувальник зі збереженням даних запускайте з гілки `lab-09`.
 
 ## Обмеження DummyJSON
 
